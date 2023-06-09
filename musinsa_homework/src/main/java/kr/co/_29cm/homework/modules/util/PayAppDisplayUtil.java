@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.co._29cm.homework.modules.order.dto.OrderAppDTO;
 import kr.co._29cm.homework.modules.order.dto.OrderAppItemDTO;
+import kr.co._29cm.homework.modules.order.entity.OrderApp;
 import kr.co._29cm.homework.modules.product.dto.ProductDTO;
 
 /**
@@ -36,7 +37,7 @@ public class PayAppDisplayUtil {
 	 * @param productList
 	 * @param itemList
 	 */
-	public static OrderAppDTO productPayDisPlay(OrderAppDTO appDTO, List<ProductDTO> productList, List<OrderAppItemDTO> itemList) {
+	public static void productPayDisPlay(OrderApp app, List<OrderAppItemDTO> itemList) {
 
 		int totalAmount = 0;
 		int deliverAmount = 0;
@@ -56,12 +57,8 @@ public class PayAppDisplayUtil {
 		System.out.println("지불금액: "+(totalAmount+deliverAmount));
 		System.out.println("-----------------------------------");
 		
-		appDTO.setDeliverAmount(deliverAmount);
-		appDTO.setTotalAmount((totalAmount+deliverAmount));
-		appDTO.setItemList(itemList);
-		appDTO.setCheckProductList(productList);
-		
-		return appDTO;
+		app.addDeliverAmount(deliverAmount);
+		app.addTotalAmount((totalAmount+deliverAmount));
 		
 	}
 	

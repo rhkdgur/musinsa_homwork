@@ -15,16 +15,20 @@ import org.springframework.transaction.annotation.Transactional;
 import com.querydsl.core.BooleanBuilder;
 
 import kr.co._29cm.homework.common.service.BaseService;
+import kr.co._29cm.homework.exception.NotExistProductException;
+import kr.co._29cm.homework.exception.SoldOutException;
 import kr.co._29cm.homework.modules.order.dto.OrderAppDTO;
 import kr.co._29cm.homework.modules.order.dto.OrderAppDefaultDTO;
 import kr.co._29cm.homework.modules.order.dto.OrderAppItemDTO;
 import kr.co._29cm.homework.modules.order.entity.OrderApp;
+import kr.co._29cm.homework.modules.order.entity.OrderAppItem;
 import kr.co._29cm.homework.modules.order.entity.QOrderApp;
 import kr.co._29cm.homework.modules.order.repository.OrderAppItemRepository;
 import kr.co._29cm.homework.modules.order.repository.OrderAppRepository;
-import kr.co._29cm.homework.modules.product.dto.ProductDTO;
+import kr.co._29cm.homework.modules.product.entity.Product;
 import kr.co._29cm.homework.modules.product.repository.ProductRepository;
 import kr.co._29cm.homework.modules.product.service.ProductService;
+import kr.co._29cm.homework.modules.util.PayAppDisplayUtil;
 
 /**
  * 
@@ -44,9 +48,6 @@ public class OrderAppService extends BaseService{
 
 	@Autowired
 	private OrderAppRepository orderAppRepository;
-	
-	@Autowired
-	private OrderAppItemRepository orderAppItemRepository;
 	
 	@Autowired
 	private ProductService productService;
@@ -100,8 +101,8 @@ public class OrderAppService extends BaseService{
 	 * @param dto
 	 * @throws Exception
 	 */
-	@Transactional
-	public void insertOrderApp(OrderAppDTO dto) throws Exception {
+	@Transactional(rollbackFor = {SoldOutException.class,NotExistProductException.class,Exception.class})
+	public void insertOrderApp(OrderAppDTO dto,List<String> productNumList) throws Exception {
 		if(lock.tryLock(10, TimeUnit.SECONDS)) {
 			
 			try {
@@ -109,20 +110,37 @@ public class OrderAppService extends BaseService{
 				String orderNum = orderAppRepository.selectOrderNumMax();
 				dto.setOrderNum(orderNum);
 				
-				//주문 정보 등록
-				orderAppRepository.save(dto.entity());
-				//주문 상품 정보 등록
+				OrderApp orderApp = new OrderApp(dto);
+				
+				//구매 상품 조회
+				List<Product> productList = productRepository.selectProductNumListIn(productNumList);
+				
+				//상품 유효성 체크
 				for(OrderAppItemDTO itemDTO : dto.getItemList()) {
-					itemDTO.setOrderNum(orderNum);
-					orderAppItemRepository.save(itemDTO.entity());
+					
+					//해당 상품 존재 여부 filter 체크
+					Product product = productList.stream().filter(x->x.getProductNum().equals(itemDTO.getProductNum())).findFirst().orElse(null);
+					if(product == null) {
+						throw new NotExistProductException("해당 제품은 존재하지 않습니다.");
+					}
+					
+					//재고량 체크
+					productService.validateProductCntCheck(product.getProductNum(),(product.getCnt() - itemDTO.getCnt()));
+					
+					//상품 목록 리스트
+					OrderAppItem orderAppItem = new OrderAppItem(itemDTO,orderApp,product);
+					orderApp.addItemList(orderAppItem);
+					
+					//재고량 마이너스 처리
+					product.minusProductCnt(itemDTO.getCnt());
 				}
 				
-				// 상품 재고 업데이트
-				for(ProductDTO productDTO : dto.getCheckProductList()) {
-					productRepository.updateProductCnt(productDTO.entity());
-				}
+				//결제 화면 출력
+				PayAppDisplayUtil.productPayDisPlay(orderApp,dto.getItemList());	
+				
+				//주문 정보 등록
+				orderAppRepository.save(orderApp);
 			}catch (Exception e) {
-				System.out.println(e.getMessage());
 				throw new Exception(e.getMessage());
 			}finally {
 				lock.unlock();

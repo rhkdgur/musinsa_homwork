@@ -41,16 +41,6 @@ public class ProductDTO {
 		this.price = entity.getPrice();
 		this.cnt = entity.getCnt();
 	}
-	
-	/**재고 수량 감소*/
-	public void minusProductCnt(int cnt) {
-		this.cnt -= cnt;
-	}
-	
-	/**재고 수량 증가*/
-	public void plusProductCnt(int cnt) {
-		this.cnt += cnt;
-	}
 
 	public String getProductNum() {
 		return productNum;

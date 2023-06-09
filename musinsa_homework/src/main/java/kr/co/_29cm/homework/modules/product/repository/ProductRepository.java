@@ -1,10 +1,13 @@
 package kr.co._29cm.homework.modules.product.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import kr.co._29cm.homework.modules.product.dto.ProductDTO;
 import kr.co._29cm.homework.modules.product.entity.Product;
 
 /**
@@ -20,6 +23,9 @@ import kr.co._29cm.homework.modules.product.entity.Product;
 * 2023.06.07        ghgo       최초 생성
  */
 public interface ProductRepository extends JpaRepository<Product, String>{
+	
+	@Query("SELECT p from Product p where p.productNum IN (:productNum)")
+	List<Product> selectProductNumListIn(@Param("productNum") List<String> list) throws Exception;
 
 	/**
 	 * 상품 재고량 업데이트

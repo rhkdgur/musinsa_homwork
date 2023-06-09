@@ -1,6 +1,7 @@
 package kr.co._29cm.homework.modules.order.dto;
 
 import kr.co._29cm.homework.modules.order.entity.OrderAppItem;
+import kr.co._29cm.homework.modules.product.dto.ProductDTO;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
@@ -23,6 +24,12 @@ public class OrderAppItemDTO {
 	
 	/**상품명*/
 	private String name = "";
+	
+	/**주문 VO*/
+	private OrderAppDTO orderApp = new OrderAppDTO();
+	
+	/**상품 VO*/
+	private ProductDTO product = new ProductDTO();
 	
 	public OrderAppItem entity() {
 		return OrderAppItem.builder().dto(this).build();
@@ -59,6 +66,7 @@ public class OrderAppItemDTO {
 
 	public void setOrderNum(String orderNum) {
 		this.orderNum = orderNum;
+		this.getOrderApp().setOrderNum(orderNum);
 	}
 
 	public String getProductNum() {
@@ -67,6 +75,7 @@ public class OrderAppItemDTO {
 
 	public void setProductNum(String productNum) {
 		this.productNum = productNum;
+		this.getProduct().setProductNum(productNum);
 	}
 
 	public void setIdx(int idx) {
@@ -83,6 +92,14 @@ public class OrderAppItemDTO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public OrderAppDTO getOrderApp() {
+		return orderApp;
+	}
+
+	public ProductDTO getProduct() {
+		return product;
 	}
 	
 	

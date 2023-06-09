@@ -4,31 +4,42 @@ import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import kr.co._29cm.homework.modules.product.dto.ProductDTO;
+import kr.co._29cm.homework.modules.product.service.ProductService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Rollback(false)
 public class SoldOutExcetpionTest {
 	
-	static int maxLimit = 10000;
+	@Autowired
+	private ProductService productService;
 
 	@Test
 	void SoldOutExceptionTest() {
 		try {
+			ProductDTO productDTO = new ProductDTO();
+			productDTO.setProductNum("768848");
 			
-			Runnable r1 = new MultiThread("A");
-			Thread tA = new Thread(r1);
-			Runnable r2 = new MultiThread("B");
-			Thread tB = new Thread(r2);
+			productDTO = productService.selectProduct(productDTO);
+			//주문1
+			Runnable order1 = new MultiThread("order1",productDTO);
+			Thread th1 = new Thread(order1);
+			//주문2
+			Runnable order2 = new MultiThread("order2",productDTO);
+			Thread th2 = new Thread(order2);
 			
-			tA.start();
-			tB.start();
+			th1.start();
+			th2.start();
 			
+			
+			Thread.sleep(1000);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -38,25 +49,32 @@ public class SoldOutExcetpionTest {
 		
 		private String gubun = "";
 		
-		private MultiThread(String gubun) {
+		private ProductDTO productDTO;
+		
+		private MultiThread(String gubun,ProductDTO productDTO) {
 			this.gubun = gubun;
+			this.productDTO = productDTO;
 		}
 
 		@Override
 		public void run() {
 
 			while(true) {
-				try {
-					int cnt = new Random().nextInt(100);
-					maxLimit -= cnt;
-					if(maxLimit < 0) {
-						throw new SoldOutException("SoldOutException 발생. 주문한 상품량이 재고량보다 큽니다.");
+					try {	
+						//수량 적용
+						int cnt = new Random().nextInt(10);
+						int totalCnt = (productDTO.getCnt() - cnt);
+						
+						//수량 변경 후 데이터
+						System.out.println("### 구입 수량 : "+cnt+",남은 수량 : "+totalCnt+", 쓰레드 구분 : "+this.gubun);
+						if(totalCnt < 0) {
+							throw new SoldOutException("SoldOutException 발생. 주문한 상품량이 재고량보다 큽니다. 쓰레드 구분 : "+this.gubun);
+						}					
+							
+					}catch (Exception e) {
+						System.err.println(e.getMessage());
+						break;
 					}
-					System.out.println("### 현 수량 : "+maxLimit+", 구입 수량 : "+cnt+", 쓰레드 구분 : "+this.gubun);
-				}catch (SoldOutException e) {
-					System.out.println(e.getMessage());
-					break;
-				}
 			}
 		}
 		

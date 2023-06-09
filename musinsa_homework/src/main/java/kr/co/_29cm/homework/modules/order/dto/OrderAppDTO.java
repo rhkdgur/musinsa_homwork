@@ -1,5 +1,6 @@
 package kr.co._29cm.homework.modules.order.dto;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,11 +33,11 @@ public class OrderAppDTO {
 	/**배송비*/
 	private int deliverAmount = 0;
 	
+	/**등록일자*/
+	private LocalDateTime createDate;
+	
 	/**상품 아이템 목록*/
 	private List<OrderAppItemDTO> itemList = new ArrayList<OrderAppItemDTO>();
-	
-	/**결제 대상 상품*/
-	private List<ProductDTO> checkProductList = new ArrayList<>();
 
 	public OrderApp entity() {
 		return OrderApp.builder().dto(this).build();
@@ -83,14 +84,12 @@ public class OrderAppDTO {
 		this.itemList = itemList;
 	}
 
-	public List<ProductDTO> getCheckProductList() {
-		return checkProductList;
+	public LocalDateTime getCreateDate() {
+		return createDate;
 	}
 
-	public void setCheckProductList(List<ProductDTO> checkProductList) {
-		this.checkProductList = checkProductList;
+	public void setCreateDate(LocalDateTime createDate) {
+		this.createDate = createDate;
 	}
-
-
 	
 }

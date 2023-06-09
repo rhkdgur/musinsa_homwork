@@ -71,6 +71,17 @@ public class ProductService extends BaseService{
 	}
 	
 	/**
+	 * 상품 상세 조회
+	 * @param productDTO
+	 * @return
+	 * @throws Exception
+	 */
+	public ProductDTO selectProduct(ProductDTO productDTO) throws Exception {
+		Product product = productRepository.findById(productDTO.getProductNum()).orElse(null);
+		return product == null ? null : new ProductDTO(product);
+	}
+	
+	/**
 	 * 상품 재고량 업데이트
 	 * @param dto
 	 * @throws Exception
@@ -85,9 +96,9 @@ public class ProductService extends BaseService{
 	 * @param dto
 	 * @throws SoldOutException
 	 */
-	public void validateProductCntCheck(ProductDTO dto) throws SoldOutException{
-		if(dto.getCnt() < 0) {
-			throw new SoldOutException("SoldOutException 발생. 주문번호 "+dto.getProductNum()+"의 상품량이 재고량보다 큽니다.");
+	public void validateProductCntCheck(String productNum,int cnt) throws SoldOutException{
+		if(cnt < 0) {
+			throw new SoldOutException("SoldOutException 발생. 주문번호 "+productNum+"의 상품량이 재고량보다 큽니다.");
 		}
 	}
 

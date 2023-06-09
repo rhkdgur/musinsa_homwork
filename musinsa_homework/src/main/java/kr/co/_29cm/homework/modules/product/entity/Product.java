@@ -1,11 +1,17 @@
 package kr.co._29cm.homework.modules.product.entity;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Comment;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.domain.Persistable;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import kr.co._29cm.homework.modules.product.dto.ProductDTO;
 import lombok.Builder;
@@ -26,7 +32,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="product")
 @NoArgsConstructor
-public class Product {
+@EntityListeners(AuditingEntityListener.class)
+public class Product{
 
 	@Id
 	@Comment("상품번호")
@@ -41,6 +48,10 @@ public class Product {
 	
 	@Comment("상품재고량")
 	private int cnt;
+	
+	@Comment("등록일자")
+	@CreatedDate
+	private LocalDateTime createDate;
 	
 	@Builder
 	public Product(ProductDTO dto) {
@@ -66,4 +77,13 @@ public class Product {
 		return cnt;
 	}
 	
+	/**재고 수량 감소*/
+	public void minusProductCnt(int cnt) {
+		this.cnt -= cnt;
+	}
+	
+	/**재고 수량 증가*/
+	public void plusProductCnt(int cnt) {
+		this.cnt += cnt;
+	}
 }

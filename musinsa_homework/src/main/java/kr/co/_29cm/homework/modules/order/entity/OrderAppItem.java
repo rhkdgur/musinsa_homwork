@@ -1,6 +1,9 @@
 package kr.co._29cm.homework.modules.order.entity;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,12 +13,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Comment;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.domain.Persistable;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import kr.co._29cm.homework.modules.order.dto.OrderAppDTO;
 import kr.co._29cm.homework.modules.order.dto.OrderAppItemDTO;
-import kr.co._29cm.homework.modules.product.dto.ProductDTO;
 import kr.co._29cm.homework.modules.product.entity.Product;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 /**
  * 
@@ -31,7 +36,9 @@ import lombok.Builder;
  */
 @Entity
 @Table(name="order_app_item")
-public class OrderAppItem {
+@NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
+public class OrderAppItem{
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Comment("일련번호")
@@ -45,6 +52,10 @@ public class OrderAppItem {
 	
 	@Comment("상품명")
 	private String name;
+	
+	@Comment("등록일자")
+	@CreatedDate
+	private LocalDateTime createDate;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "order_num")
@@ -60,12 +71,17 @@ public class OrderAppItem {
 		this.amount = dto.getAmount();
 		this.cnt = dto.getCnt();
 		this.name = dto.getName();
-		OrderAppDTO appDTO = new OrderAppDTO();
-		appDTO.setOrderNum(dto.getOrderNum());
-		orderApp = new OrderApp(appDTO);
-		ProductDTO productDTO = new ProductDTO();
-		productDTO.setProductNum(dto.getProductNum());
-		product = new Product(productDTO);
+		this.orderApp = dto.getOrderApp().entity();
+		this.product = dto.getProduct().entity();
+	}
+	
+	public OrderAppItem(OrderAppItemDTO dto, OrderApp orderApp,Product product) {
+		this.idx = dto.getIdx();
+		this.amount = dto.getAmount();
+		this.cnt = dto.getCnt();
+		this.name = dto.getName();
+		this.orderApp = orderApp;
+		this.product = product;
 	}
 
 	public int getIdx() {

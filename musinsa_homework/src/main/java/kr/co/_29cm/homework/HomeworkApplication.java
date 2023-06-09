@@ -11,6 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import kr.co._29cm.homework.modules.order.dto.OrderAppDTO;
 import kr.co._29cm.homework.modules.order.dto.OrderAppItemDTO;
@@ -21,6 +22,7 @@ import kr.co._29cm.homework.modules.product.service.ProductService;
 import kr.co._29cm.homework.modules.util.PayAppDisplayUtil;
 
 @SpringBootApplication
+@EnableJpaAuditing
 public class HomeworkApplication implements CommandLineRunner{
 
 	public static void main(String[] args) {
@@ -57,7 +59,7 @@ public class HomeworkApplication implements CommandLineRunner{
 					//주문 상품 목록
 					List<OrderAppItemDTO> itemList = new ArrayList<>();
 					//주문 상품 확인 목록
-					List<ProductDTO> orderProductList = new ArrayList<>();
+					List<String> productNumList = new ArrayList<String>();
 					
 					//상품 리스트
 					ProductDefaultDTO searchDTO = new ProductDefaultDTO();
@@ -75,16 +77,9 @@ public class HomeworkApplication implements CommandLineRunner{
 						//결제 처리
 						if(productNum.isBlank() && itemList.size() > 0) {							
 							try {
-								//상품 재고량 체크
-								for(ProductDTO tmp : orderProductList) {
-									productService.validateProductCntCheck(tmp);
-								}
-								
-								//주문 내역 display
-								PayAppDisplayUtil.productPayDisPlay(appDTO,orderProductList,itemList);
-								
 								//주문 등록
-								orderAppService.insertOrderApp(appDTO);	
+								appDTO.setItemList(itemList);
+								orderAppService.insertOrderApp(appDTO,productNumList);	
 							}catch (Exception e) {
 								System.err.println(e.getMessage());
 							}		
@@ -114,14 +109,11 @@ public class HomeworkApplication implements CommandLineRunner{
 							//주문 상품 아이템 담기
 							OrderAppItemDTO itemDTO = new OrderAppItemDTO();
 							itemDTO.setCnt(Integer.parseInt(cnt));
-							itemDTO.setProductNum(temp);
+							itemDTO.setProductNum(productNum);
 							itemDTO.setName(productDTO.getName());
 							itemDTO.setAmount(productDTO.getPrice()*Integer.parseInt(cnt));
 							itemList.add(itemDTO);
-							
-							//상품 수량 감소처리
-							productDTO.minusProductCnt(itemDTO.getCnt());
-							orderProductList.add(productDTO);
+							productNumList.add(productNum);
 						}
 					}
 				}else {
