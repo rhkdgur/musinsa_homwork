@@ -33,7 +33,13 @@
 
 #### 프로젝트 구조
 
+![프로젝트구조](https://github.com/rhkdgur/musinsa_homwork/assets/67618667/de616d1f-7bc5-4799-b02c-a043c50fa261)
+
+
 > 패키지 구조
+
+![패키지구조](https://github.com/rhkdgur/musinsa_homwork/assets/67618667/3bf92c40-ec0c-484b-a677-9c0a35ee2930)
+
 * service : 실질적인 데이터가 처리
 * dto : view 단에서 전달되는 Object
 * entity : 데이터베이스 테이블과 매칭되는 Object
