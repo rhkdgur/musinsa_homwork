@@ -39,26 +39,26 @@ class HomeworkApplicationTests {
 		try {			
 			while(true) {
 				String type = "";
-				System.out.print("ÀÔ·Â(o[order]: ÁÖ¹®, q[quit]: Á¾·á) : ");
+				System.out.print("ì…ë ¥(o[order]: ì£¼ë¬¸, q[quit]: ì¢…ë£Œ) : ");
 				type = bf.readLine();
 				
-				//ÀÔ·Â À¯È¿¼º Ã¼Å©
+				//ì£¼ë¬¸, ì¢…ë£Œ ì…ë ¥ ì˜ˆì™¸ì²˜ë¦¬
 				if(!"o".equals(type) && !"order".equals(type) && !"q".equals(type) && !"quit".equals(type)) {
-					System.out.println("o[order] ¶Ç´Â q[quit] ¸¸ ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+					System.out.println("o[order] ë˜ëŠ” q[quit]ë§Œ ì…ë ¥í•´ì£¼ì‹œê¸° ë°”ëë‹ˆë‹¤.");
 					continue;
 				}
 				
 				if("o".equals(type) || "order".equals(type)) {
 					
-					//ÁÖ¹® ¹øÈ£
+					//ì£¼ë¬¸ DTO
 					OrderAppDTO appDTO = new OrderAppDTO();
 					
-					//ÁÖ¹® »óÇ° ¸ñ·Ï
+					//ì£¼ë¬¸ ìƒí’ˆ list
 					List<OrderAppItemDTO> itemList = new ArrayList<>();
-					//ÁÖ¹® »óÇ° È®ÀÎ ¸ñ·Ï
+					//ì£¼ë¬¸ ìƒí’ˆë²ˆí˜¸ list
 					List<String> productNumList = new ArrayList<String>();
 					
-					//»óÇ° ¸®½ºÆ®
+					//ìƒí’ˆëª©ë¡ ì¡°íšŒ ëª©ë¡ ê°œìˆ˜ 20ê°œ
 					ProductDefaultDTO searchDTO = new ProductDefaultDTO();
 					searchDTO.setSize(20);
 					Page<ProductDTO> list = productService.selectProductList(searchDTO);
@@ -68,42 +68,42 @@ class HomeworkApplicationTests {
 						String productNum = "";
 						String cnt = "";
 						
-						System.out.print("»óÇ°¹øÈ£ : ");
+						System.out.print("ìƒí’ˆë²ˆí˜¸ : ");
 						productNum = bf.readLine();
 						
-						//°áÁ¦ Ã³¸®
+						//ìƒí’ˆë²ˆí˜¸ê°€ ê³µë°±ì´ê³  ì£¼ë¬¸ ìƒí’ˆì´ ìˆì„ ê²½ìš°
 						if(productNum.isBlank() && itemList.size() > 0) {							
 							try {
-								//ÁÖ¹® µî·Ï
+								//ì£¼ë¬¸ ì •ë³´ì— ì£¼ë¬¸ìƒí’ˆ list setter
 								appDTO.setItemList(itemList);
 								orderAppService.insertOrderApp(appDTO,productNumList);	
 							}catch (Exception e) {
 								System.err.println(e.getMessage());
 							}		
 							break;
-						//ÃÊ±â »óÇ° ¼±ÅÃ ¾øÀ» °æ¿ì ÃÊ±âÈ­¸é ÀÌµ¿
+						//ìƒí’ˆë²ˆí˜¸ê°€ ê³µë°±ì¼ ê²½ìš°
 						}else if(productNum.isBlank()) {
-							System.out.println("¼±ÅÃÇÏ½Å »óÇ°¹øÈ£°¡ ¾ø½À´Ï´Ù. ÃÊ±âÈ­¸éÀ¸·Î ³Ñ¾î°©´Ï´Ù.");
+							System.out.println("ì…ë ¥ëœ ìƒí’ˆë²ˆí˜¸ê°€ ì—†ìŠµë‹ˆë‹¤. ì´ˆê¸°í™”ë©´ìœ¼ë¡œ ì´ë™í•©ë‹ˆë‹¤.");
 							break;
-						//»óÇ° ´ã±â Ã³¸®
+						//ì£¼ë¬¸ ìƒí’ˆê°€ ìˆëŠ” ê²½ìš°
 						}else {
 							
 							String temp = productNum;
 							ProductDTO productDTO = list.stream().filter(x->x.getProductNum().equals(temp)).findFirst().orElse(null);
 							if(productDTO == null) {
-								System.out.println("ÇØ´ç »óÇ°¹øÈ£´Â Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+								System.out.println("ì…ë ¥í•˜ì‹  ìƒí’ˆë²ˆí˜¸ëŠ” ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 								continue;
 							}
 							
-							//»óÇ° ¼ö·® ¼±ÅÃ
-							System.out.print("¼ö·® : ");
+							//ìƒí’ˆ ìˆ˜ëŸ‰ ì…ë ¥
+							System.out.print("ìˆ˜ëŸ‰ : ");
 							cnt = bf.readLine();
 							if(!isInteger(cnt)) {
-								System.out.println("¼ıÀÚ¸¦ ÀÔ·ÂÇØÁÖ½Ã±â ¹Ù¶ø´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ½Ã±â ¹Ù¶ø´Ï´Ù.");
+								System.out.println("ìˆ«ìë§Œ ì…ë ¥í•´ì£¼ì‹œê¸° ë°”ëë‹ˆë‹¤. ë‹¤ì‹œ ìƒí’ˆë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì‹œê¸° ë°”ëë‹ˆë‹¤.");
 								continue;
 							}
 							
-							//ÁÖ¹® »óÇ° ¾ÆÀÌÅÛ ´ã±â
+							//ì£¼ë¬¸ ìƒí’ˆ ë‹´ê¸°
 							OrderAppItemDTO itemDTO = new OrderAppItemDTO();
 							itemDTO.setCnt(Integer.parseInt(cnt));
 							itemDTO.setProductNum(productNum);
@@ -114,7 +114,7 @@ class HomeworkApplicationTests {
 						}
 					}
 				}else {
-					System.out.println("°í°´´ÔÀÇ ÁÖ¹® °¨»çÇÕ´Ï´Ù.");
+					System.out.println("ê³ ê°ë‹˜ì˜ ì£¼ë¬¸ ê°ì‚¬í•©ë‹ˆë‹¤.");
 					break;
 				}
 			}
@@ -131,7 +131,7 @@ class HomeworkApplicationTests {
 	}
 	
 	/**
-	 * ¼ıÀÚ¿©ºÎ È®ÀÎ
+	 * ìˆ«ì ìœ íš¨ì„± ì²´í¬
 	 * @param cnt
 	 * @return
 	 */

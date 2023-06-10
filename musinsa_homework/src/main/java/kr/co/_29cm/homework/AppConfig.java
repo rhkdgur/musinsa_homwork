@@ -15,11 +15,11 @@ import lombok.RequiredArgsConstructor;
 * @fileName      : AppConfig.java
 * @author        : Gwang hyeok Go
 * @date          : 2023.06.07
-* @description   : Äõ¸® ¶óÀÌºê·¯¸® bean Ã³¸® Å¬·¡½º
+* @description   : ì˜ì†ì„± ì²˜ë¦¬ config
 * ===========================================================
 * DATE              AUTHOR             NOTE
 * -----------------------------------------------------------
-* 2023.06.07        ghgo       ÃÖÃÊ »ı¼º
+* 2023.06.07        ghgo       		ìµœì´ˆìƒì„±
  */
 @Configuration
 @RequiredArgsConstructor

@@ -10,11 +10,11 @@ import kr.co._29cm.homework.modules.order.entity.OrderAppItem;
 * @fileName      : OrderAppItemRepository.java
 * @author        : Gwang hyeok Go
 * @date          : 2023.06.07
-* @description   : 惑前 酒捞袍 格废 饭器瘤配府
+* @description   : 欤茧 靸來拡 repository
 * ===========================================================
 * DATE              AUTHOR             NOTE
 * -----------------------------------------------------------
-* 2023.06.07        ghgo       弥檬 积己
+* 2023.06.07        ghgo       		斓滌磮靸濎劚
  */
 public interface OrderAppItemRepository extends JpaRepository<OrderAppItem, Integer>{
 

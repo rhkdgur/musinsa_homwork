@@ -15,28 +15,28 @@ import lombok.NoArgsConstructor;
 * @fileName      : OrderAppDTO.java
 * @author        : Gwang hyeok Go
 * @date          : 2023.06.07
-* @description   : ÁÖ¹® DTO
+* @description   : ì£¼ë¬¸ ì •ë³´ DTO
 * ===========================================================
 * DATE              AUTHOR             NOTE
 * -----------------------------------------------------------
-* 2023.06.07        ghgo       ÃÖÃÊ »ı¼º
+* 2023.06.07        ghgo       		ìµœì´ˆìƒì„±
  */
 @NoArgsConstructor
 public class OrderAppDTO {
 
-	/**ÁÖ¹®¹øÈ£*/
+	/**ì£¼ë¬¸ë²ˆí˜¸*/
 	private String orderNum = "";
 	
-	/**ÀüÃ¼±İ¾×*/
+	/**ì´ ê¸ˆì•¡*/
 	private int totalAmount = 0;
 
-	/**¹è¼Ûºñ*/
+	/**ë°°ì†¡ë¹„*/
 	private int deliverAmount = 0;
 	
-	/**µî·ÏÀÏÀÚ*/
+	/**ë“±ë¡ì¼ì*/
 	private LocalDateTime createDate;
 	
-	/**»óÇ° ¾ÆÀÌÅÛ ¸ñ·Ï*/
+	/**ì£¼ë¬¸ ìƒí’ˆ ëª©ë¡*/
 	private List<OrderAppItemDTO> itemList = new ArrayList<OrderAppItemDTO>();
 
 	public OrderApp entity() {

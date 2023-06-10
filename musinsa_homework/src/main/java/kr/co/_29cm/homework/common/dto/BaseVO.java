@@ -12,26 +12,26 @@ import org.springframework.data.domain.Sort;
 * @fileName      : BaseVO.java
 * @author        : Gwang hyeok Go
 * @date          : 2023.06.07
-* @description   : °Ë»ö °øÅë VO
+* @description   : í˜ì´ì§• ë° ê²€ìƒ‰ ê³µí†µVO
 * ===========================================================
 * DATE              AUTHOR             NOTE
 * -----------------------------------------------------------
-* 2023.06.07        ghgo       ÃÖÃÊ »ı¼º
+* 2023.06.07        ghgo       	ìµœì´ˆìƒì„±
  */
 public class BaseVO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	/**ÅëÇÕ°Ë»ö*/
+	/**í†µí•©ê²€ìƒ‰*/
 	private String sstring = "";
 	
-	/**°Ë»öÀ¯Çü*/
+	/**ê²€ìƒ‰ êµ¬ë¶„*/
 	private String stype = "";
 	
-	/**ÆäÀÌÁö*/
+	/**í˜„ì¬ í˜ì´ì§€*/
 	private int page = 1;
 	
-	/**¸ñ·Ï °³¼ö*/
+	/**í˜ì´ì§€ ëª©ë¡ ê°œìˆ˜*/
 	private int size = 10;
 	
 	private Sort sort = null;

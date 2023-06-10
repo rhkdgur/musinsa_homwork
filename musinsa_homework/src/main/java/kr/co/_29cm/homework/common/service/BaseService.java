@@ -1,8 +1,5 @@
 package kr.co._29cm.homework.common.service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,15 +11,15 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 * @fileName      : BaseService.java
 * @author        : Gwang hyeok Go
 * @date          : 2023.06.07
-* @description   : ∞¯≈Î º≠∫ÒΩ∫ ¡¶∞¯
+* @description   : Í≥µÌÜµ service Í∏∞Îä•  
 * ===========================================================
 * DATE              AUTHOR             NOTE
 * -----------------------------------------------------------
-* 2023.06.07        ghgo       √÷√  ª˝º∫
+* 2023.06.07        ghgo       		ÏµúÏ¥àÏÉùÏÑ±
  */
 @Component
 public class BaseService {
-	/**QueryDSL ¡¶∞¯*/
+	/**QueryDSL*/
 	@Autowired
 	protected JPAQueryFactory jpaQuery;
 }

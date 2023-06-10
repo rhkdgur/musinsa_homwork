@@ -36,11 +36,11 @@ import kr.co._29cm.homework.modules.util.PayAppDisplayUtil;
 * @fileName      : OrderAppService.java
 * @author        : Gwang hyeok Go
 * @date          : 2023.06.07
-* @description   : »óÇ° service
+* @description   : ì£¼ë¬¸ ì²˜ë¦¬ service
 * ===========================================================
 * DATE              AUTHOR             NOTE
 * -----------------------------------------------------------
-* 2023.06.07        ghgo       ÃÖÃÊ »ı¼º
+* 2023.06.07        ghgo       		 ìµœì´ˆìƒì„±
  */
 @Service
 @Transactional(readOnly = true)
@@ -58,7 +58,7 @@ public class OrderAppService extends BaseService{
 	private static final Lock lock = new ReentrantLock();
 	
 	/**
-	 * ÁÖ¹® °øÅë Äõ¸®
+	 * ê²€ìƒ‰ ê³µí†µ ì¿¼ë¦¬
 	 * @param searchDTO
 	 * @return
 	 */
@@ -66,7 +66,7 @@ public class OrderAppService extends BaseService{
 		BooleanBuilder builder = new BooleanBuilder();
 		QOrderApp qOrderApp = QOrderApp.orderApp;
 		
-		//ÁÖ¹®¹øÈ£°¡ ÀÖÀ» °æ¿ì
+		//ì£¼ë¬¸ë²ˆí˜¸
 		if(searchDTO.getOrderNum() != null && !searchDTO.getOrderNum().isEmpty()) {
 			builder.and(qOrderApp.orderNum.eq(searchDTO.getOrderNum()));
 		}
@@ -76,7 +76,7 @@ public class OrderAppService extends BaseService{
 	
 	
 	/**
-	 * ÁÖ¹® ¸ñ·Ï Á¶È¸
+	 * ì£¼ë¬¸ ì •ë³´ ì¡°íšŒ
 	 * @param dto
 	 * @return
 	 * @throws Exception
@@ -97,7 +97,7 @@ public class OrderAppService extends BaseService{
 	}
 	
 	/**
-	 * ÁÖ¹® µî·Ï
+	 * ì£¼ë¬¸ ì •ë³´ ê²°ì œ ì²˜ë¦¬
 	 * @param dto
 	 * @throws Exception
 	 */
@@ -106,39 +106,39 @@ public class OrderAppService extends BaseService{
 		if(lock.tryLock(10, TimeUnit.SECONDS)) {
 			
 			try {
-				//pk »ı¼º
+				//ì£¼ë¬¸ë²ˆí˜¸ pk ìƒì„±
 				String orderNum = orderAppRepository.selectOrderNumMax();
 				dto.setOrderNum(orderNum);
 				
 				OrderApp orderApp = new OrderApp(dto);
 				
-				//±¸¸Å »óÇ° Á¶È¸
+				//ì£¼ë¬¸ ìƒí’ˆ ë²ˆí˜¸ ì¡°íšŒ
 				List<Product> productList = productRepository.selectProductNumListIn(productNumList);
 				
-				//»óÇ° À¯È¿¼º Ã¼Å©
+				//ì£¼ë¬¸ ìƒí’ˆ ì •ë³´ì— ëŒ€í•œ ìœ íš¨ì„± ì²´í¬
 				for(OrderAppItemDTO itemDTO : dto.getItemList()) {
 					
-					//ÇØ´ç »óÇ° Á¸Àç ¿©ºÎ filter Ã¼Å©
+					//ìƒí’ˆ ì¡´ì¬ ì—¬ë¶€ ì²´í¬
 					Product product = productList.stream().filter(x->x.getProductNum().equals(itemDTO.getProductNum())).findFirst().orElse(null);
 					if(product == null) {
-						throw new NotExistProductException("ÇØ´ç Á¦Ç°Àº Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+						throw new NotExistProductException("í•´ë‹¹ ìƒí’ˆì€ ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ìƒí’ˆì…ë‹ˆë‹¤.");
 					}
 					
-					//Àç°í·® Ã¼Å©
+					//ìƒí’ˆ ì¬ê³ ëŸ‰ ì²´í¬
 					productService.validateProductCntCheck(product.getProductNum(),(product.getCnt() - itemDTO.getCnt()));
 					
-					//»óÇ° ¸ñ·Ï ¸®½ºÆ®
+					//ì£¼ë¬¸ ìƒí’ˆ ì •ë³´ ë‹´ê¸°
 					OrderAppItem orderAppItem = new OrderAppItem(itemDTO,orderApp,product);
 					orderApp.addItemList(orderAppItem);
 					
-					//Àç°í·® ¸¶ÀÌ³Ê½º Ã³¸®
+					//ìƒí’ˆ ì •ë³´ ì¬ê³ ëŸ‰ ë§ˆì´ë„ˆìŠ¤ ì²˜ë¦¬
 					product.minusProductCnt(itemDTO.getCnt());
 				}
 				
-				//°áÁ¦ È­¸é Ãâ·Â
+				//ê²°ì œ í™”ë©´ ì¶œë ¥
 				PayAppDisplayUtil.productPayDisPlay(orderApp,dto.getItemList());	
 				
-				//ÁÖ¹® Á¤º¸ µî·Ï
+				//ì£¼ë¬¸ ì •ë³´ ë“±ë¡
 				orderAppRepository.save(orderApp);
 			}catch (Exception e) {
 				throw new Exception(e.getMessage());

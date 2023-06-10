@@ -9,7 +9,7 @@ plugins {
 	id 'war'
 	id 'org.springframework.boot' version '2.7.5'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
-	//querydsl �߰�
+	//querydsl
     id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
 }
 
@@ -55,7 +55,7 @@ tasks.named('test') {
 }
 
 
-//querydsl �߰� ����
+//querydsl
 //def querydslDir = "src/main/generated/querydsl"
 def querydslDir = "$buildDir/generated/querydsl"
 
@@ -75,4 +75,4 @@ configurations {
    }
    querydsl.extendsFrom compileClasspath
 }
-//querydsl �߰� ��
+//querydsl 

@@ -27,10 +27,10 @@ public class SoldOutExcetpionTest {
 			productDTO.setProductNum("768848");
 			
 			productDTO = productService.selectProduct(productDTO);
-			//ÁÖ¹®1
+			//Thread1
 			Runnable order1 = new MultiThread("order1",productDTO);
 			Thread th1 = new Thread(order1);
-			//ÁÖ¹®2
+			//Thread2
 			Runnable order2 = new MultiThread("order2",productDTO);
 			Thread th2 = new Thread(order2);
 			
@@ -61,14 +61,15 @@ public class SoldOutExcetpionTest {
 
 			while(true) {
 					try {	
-						//¼ö·® Àû¿ë
+						//êµ¬ë§¤ ìˆ˜ëŸ‰
 						int cnt = new Random().nextInt(10);
+						//ë‚¨ì€ ìˆ˜ëŸ‰
 						int totalCnt = (productDTO.getCnt() - cnt);
 						
-						//¼ö·® º¯°æ ÈÄ µ¥ÀÌÅÍ
-						System.out.println("### ±¸ÀÔ ¼ö·® : "+cnt+",³²Àº ¼ö·® : "+totalCnt+", ¾²·¹µå ±¸ºĞ : "+this.gubun);
+						//ì¬ê³ ëŸ‰ ë‚¨ì€ ì—¬ë¶€ ì²´í¬
+						System.out.println("### êµ¬ë§¤ ìˆ˜ëŸ‰ : "+cnt+",ë‚¨ì€ ìˆ˜ëŸ‰ : "+totalCnt+", ìŠ¤ë ˆë“œ êµ¬ë¶„: "+this.gubun);
 						if(totalCnt < 0) {
-							throw new SoldOutException("SoldOutException ¹ß»ı. ÁÖ¹®ÇÑ »óÇ°·®ÀÌ Àç°í·®º¸´Ù Å®´Ï´Ù. ¾²·¹µå ±¸ºĞ : "+this.gubun);
+							throw new SoldOutException("SoldOutException ë°œìƒ. ì£¼ë¬¸í•œ ìƒí’ˆëŸ‰ì´ ì¬ê³ ëŸ‰ë³´ë‹¤ í½ë‹ˆë‹¤. ìŠ¤ë ˆë“œ êµ¬ë¶„: "+this.gubun);
 						}					
 							
 					}catch (Exception e) {

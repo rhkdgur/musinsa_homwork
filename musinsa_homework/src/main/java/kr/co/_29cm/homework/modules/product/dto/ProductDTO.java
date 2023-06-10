@@ -9,28 +9,28 @@ import lombok.NoArgsConstructor;
 * @fileName      : ProductDTO.java
 * @author        : Gwang hyeok Go
 * @date          : 2023.06.07
-* @description   : »óÇ° DTO
+* @description   : ìƒí’ˆ ì •ë³´ DTO
 * ===========================================================
 * DATE              AUTHOR             NOTE
 * -----------------------------------------------------------
-* 2023.06.07        ghgo       ÃÖÃÊ »ý¼º
+* 2023.06.07        ghgo     		ìµœì´ˆìƒì„±
  */
 @NoArgsConstructor
 public class ProductDTO {
 	
-	/**»óÇ°¹øÈ£*/
+	/**ìƒí’ˆë²ˆí˜¸*/
 	private String productNum;
 	
-	/**»óÇ°ÀÌ¸§*/
+	/**ìƒí’ˆëª…*/
 	private String name;
 	
-	/**°¡°Ý*/
+	/**ìƒí’ˆ ê¸ˆì•¡*/
 	private int price;
 	
-	/**»óÇ° Àç°í·®*/
+	/**ìƒí’ˆ ìˆ˜ëŸ‰*/
 	private int cnt;
 	
-	//DTO -> Entity º¯È¯
+	//DTO -> Entity
 	public Product entity() {
 		return Product.builder().dto(this).build();
 	}

@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import kr.co._29cm.homework.modules.product.dto.ProductDTO;
 import kr.co._29cm.homework.modules.product.entity.Product;
 
 /**
@@ -16,19 +15,25 @@ import kr.co._29cm.homework.modules.product.entity.Product;
 * @fileName      : ProductRepository.java
 * @author        : Gwang hyeok Go
 * @date          : 2023.06.07
-* @description   : »óÇ° ·¹Æ÷ÁöÅä¸®
+* @description   : ìƒí’ˆ repository
 * ===========================================================
 * DATE              AUTHOR             NOTE
 * -----------------------------------------------------------
-* 2023.06.07        ghgo       ÃÖÃÊ »ı¼º
+* 2023.06.07        ghgo       		ìµœì´ˆìƒì„±
  */
 public interface ProductRepository extends JpaRepository<Product, String>{
 	
+	/**
+	 * ìƒí’ˆë²ˆí˜¸ ë³„ ì¡°íšŒ
+	 * @param list
+	 * @return
+	 * @throws Exception
+	 */
 	@Query("SELECT p from Product p where p.productNum IN (:productNum)")
 	List<Product> selectProductNumListIn(@Param("productNum") List<String> list) throws Exception;
 
 	/**
-	 * »óÇ° Àç°í·® ¾÷µ¥ÀÌÆ®
+	 * ìƒí’ˆ ì¬ê³  ì—…ë°ì´íŠ¸
 	 * @param product
 	 * @throws Exception
 	 */

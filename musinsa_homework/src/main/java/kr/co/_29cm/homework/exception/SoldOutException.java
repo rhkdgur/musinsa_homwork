@@ -6,11 +6,11 @@ package kr.co._29cm.homework.exception;
 * @fileName      : SoldOutException.java
 * @author        : Gwang hyeok Go
 * @date          : 2023.06.07
-* @description   : »óÇ° Àç°í·® Ã¼Å© exception
+* @description   : ìƒí’ˆ ì¬ê³ ëŸ‰ ìœ íš¨ì„± exception
 * ===========================================================
 * DATE              AUTHOR             NOTE
 * -----------------------------------------------------------
-* 2023.06.07        ghgo       ÃÖÃÊ »ı¼º
+* 2023.06.07        ghgo       		ìµœì´ˆìƒì„±
  */
 public class SoldOutException extends Exception{
 	

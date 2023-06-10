@@ -15,16 +15,16 @@ import kr.co._29cm.homework.modules.order.entity.OrderApp;
 * @fileName      : OrderAppRepository.java
 * @author        : Gwang hyeok Go
 * @date          : 2023.06.07
-* @description   :
+* @description   : ì£¼ë¬¸ ì •ë³´ repository
 * ===========================================================
 * DATE              AUTHOR             NOTE
 * -----------------------------------------------------------
-* 2023.06.07        ghgo       ÃÖÃÊ »ı¼º
+* 2023.06.07        ghgo       		ìµœì´ˆìƒì„±
  */
 public interface OrderAppRepository extends JpaRepository<OrderApp, String>{
 	
 	/***
-	 * ÁÖ¹®¹øÈ£ »ı¼º
+	 * ï¿½Ö¹ï¿½ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	@Query(value=" select CONVERT(IFNULL(MAX(order_num),concat(FORMATDATETIME(NOW(),'yyyyMMdd'),'00')),int)+1 as orderNum  FROM order_app"
@@ -32,7 +32,7 @@ public interface OrderAppRepository extends JpaRepository<OrderApp, String>{
 	String selectOrderNumMax() throws Exception;
 	
 	/**
-	 * ÁÖ¹® Á¤º¸ Á¶È¸
+	 * ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 	 * @param orderNum
 	 * @return
 	 * @throws Exception

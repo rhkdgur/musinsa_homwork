@@ -8,17 +8,17 @@ import kr.co._29cm.homework.common.dto.BaseVO;
 * @fileName      : ProductDefaultDTO.java
 * @author        : Gwang hyeok Go
 * @date          : 2023.06.07
-* @description   : »óÇ° °Ë»ö DefaultDTO
+* @description   : ìƒí’ˆ ì •ë³´ ê²€ìƒ‰ DefaultDTO
 * ===========================================================
 * DATE              AUTHOR             NOTE
 * -----------------------------------------------------------
-* 2023.06.07        ghgo       ÃÖÃÊ »ı¼º
+* 2023.06.07        ghgo       		ìµœì´ˆìƒì„±
  */
 public class ProductDefaultDTO extends BaseVO{
 
 	private static final long serialVersionUID = 1L;
 	
-	/**»óÇ°¹øÈ£*/
+	/**ìƒí’ˆë²ˆí˜¸*/
 	private String productNum = "";
 
 	public String getProductNum() {

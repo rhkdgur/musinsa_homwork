@@ -2,7 +2,6 @@ package kr.co._29cm.homework.modules.util;
 
 import java.util.List;
 
-import kr.co._29cm.homework.modules.order.dto.OrderAppDTO;
 import kr.co._29cm.homework.modules.order.dto.OrderAppItemDTO;
 import kr.co._29cm.homework.modules.order.entity.OrderApp;
 import kr.co._29cm.homework.modules.product.dto.ProductDTO;
@@ -13,27 +12,27 @@ import kr.co._29cm.homework.modules.product.dto.ProductDTO;
 * @fileName      : PayAppUtil.java
 * @author        : Gwang hyeok Go
 * @date          : 2023.06.07
-* @description   : °áÁ¦ display util
+* @description   : ìƒí’ˆ êµ¬ë§¤ display util
 * ===========================================================
 * DATE              AUTHOR             NOTE
 * -----------------------------------------------------------
-* 2023.06.07        ghgo       ÃÖÃÊ »ı¼º
+* 2023.06.07        ghgo      		ìµœì´ˆìƒì„±
  */
 public class PayAppDisplayUtil {
 	
 	/**
-	 * »óÇ° ¸®½ºÆ® display
+	 * ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½Æ® display
 	 * @param list
 	 */
 	public static void productListDisplay(List<ProductDTO> list) {
-		System.out.println("»óÇ°¹øÈ£		»óÇ°¸í								ÆÇ¸Å°¡°İ			Àç°í¼ö");
+		System.out.println("ìƒí’ˆë²ˆí˜¸		ìƒí’ˆëª…								íŒë§¤ê°€ê²©			ì¬ê³ ìˆ˜");
 		for(ProductDTO tmp : list) {
 			System.out.println(tmp.getProductNum()+"		"+tmp.getName()+"					"+tmp.getPrice()+"		"+tmp.getCnt());
 		}
 	}
 
 	/***
-	 * °áÁ¦ Ã³¸® ½Ã½ºÅÛ
+	 * ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½Ã½ï¿½ï¿½ï¿½
 	 * @param productList
 	 * @param itemList
 	 */
@@ -42,19 +41,19 @@ public class PayAppDisplayUtil {
 		int totalAmount = 0;
 		int deliverAmount = 0;
 		
-		System.out.println("ÁÖ¹®³»¿ª:");
+		System.out.println("ì£¼ë¬¸ë‚´ì—­:");
 		System.out.println("-----------------------------------");
 		for(OrderAppItemDTO tmp : itemList) {
-			System.out.println(tmp.getName()+" - "+tmp.getCnt()+"°³");
+			System.out.println(tmp.getName()+" - "+tmp.getCnt()+"ï¿½ï¿½");
 			totalAmount += tmp.getAmount();
 		}			
 		System.out.println("-----------------------------------");
 		if(totalAmount < 50000) {
 			deliverAmount = 2500;
 		}
-		System.out.println("ÁÖ¹®±İ¾×: "+ totalAmount);
+		System.out.println("ì£¼ë¬¸ê¸ˆì•¡: "+ totalAmount);
 		System.out.println("-----------------------------------");
-		System.out.println("ÁöºÒ±İ¾×: "+(totalAmount+deliverAmount));
+		System.out.println("ì§€ë¶ˆê¸ˆì•¡: "+(totalAmount+deliverAmount));
 		System.out.println("-----------------------------------");
 		
 		app.addDeliverAmount(deliverAmount);

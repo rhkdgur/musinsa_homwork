@@ -4,31 +4,43 @@ import kr.co._29cm.homework.modules.order.entity.OrderAppItem;
 import kr.co._29cm.homework.modules.product.dto.ProductDTO;
 import lombok.NoArgsConstructor;
 
+/**
+ * 
+* @packageName   : kr.co._29cm.homework.modules.order.dto
+* @fileName      : OrderAppItemDTO.java
+* @author        : Gwang hyeok Go
+* @date          : 2023.06.10
+* @description   : ì£¼ë¬¸ ìƒí’ˆ ì •ë³´ DTO
+* ===========================================================
+* DATE              AUTHOR             NOTE
+* -----------------------------------------------------------
+* 2023.06.10        ghgo       ìµœì´ˆ ìƒì„±
+ */
 @NoArgsConstructor
 public class OrderAppItemDTO {
 
-	/**ÀÏ·Ã¹øÈ£*/
+	/**ì¼ë ¨ë²ˆí˜¸*/
 	private int idx = 0;
 
-	/**ÁÖ¹®¹øÈ£*/
+	/**ì£¼ë¬¸ë²ˆí˜¸*/
 	private String orderNum = "";
 	
-	/**»óÇ°¹øÈ£*/
+	/**ìƒí’ˆë²ˆí˜¸*/
 	private String productNum = "";
 	
-	/**±İ¾×*/
+	/**ê¸ˆì•¡*/
 	private int amount = 0;
 	
-	/**Àç°í·®*/
+	/**ìˆ˜ëŸ‰*/
 	private int cnt = 0;
 	
-	/**»óÇ°¸í*/
+	/**ìƒí’ˆì´ë¦„*/
 	private String name = "";
 	
-	/**ÁÖ¹® VO*/
+	/**ì£¼ë¬¸ ì •ë³´ VO*/
 	private OrderAppDTO orderApp = new OrderAppDTO();
 	
-	/**»óÇ° VO*/
+	/**ìƒí’ˆ ì •ë³´ VO*/
 	private ProductDTO product = new ProductDTO();
 	
 	public OrderAppItem entity() {

@@ -14,7 +14,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Comment;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import kr.co._29cm.homework.modules.order.dto.OrderAppItemDTO;
@@ -28,11 +27,11 @@ import lombok.NoArgsConstructor;
 * @fileName      : OrderAppItem.java
 * @author        : Gwang hyeok Go
 * @date          : 2023.06.07
-* @description   : »óÇ° ¾ÆÀÌÅÛ entity
+* @description   : ì£¼ë¬¸ ìƒí’ˆ entity
 * ===========================================================
 * DATE              AUTHOR             NOTE
 * -----------------------------------------------------------
-* 2023.06.07        ghgo       ÃÖÃÊ »ı¼º
+* 2023.06.07        ghgo    		ìµœì´ˆìƒì„±
  */
 @Entity
 @Table(name="order_app_item")
@@ -41,19 +40,19 @@ import lombok.NoArgsConstructor;
 public class OrderAppItem{
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Comment("ÀÏ·Ã¹øÈ£")
+	@Comment("ì¼ë ¨ë²ˆí˜¸")
 	private int idx;
 	
-	@Comment("±İ¾×")
+	@Comment("ê¸ˆì•¡")
 	private int amount;
 	
-	@Comment("°³¼ö")
+	@Comment("ìˆ˜ëŸ‰")
 	private int cnt;
 	
-	@Comment("»óÇ°¸í")
+	@Comment("ìƒí’ˆëª…")
 	private String name;
 	
-	@Comment("µî·ÏÀÏÀÚ")
+	@Comment("ë“±ë¡ì¼ì")
 	@CreatedDate
 	private LocalDateTime createDate;
 	

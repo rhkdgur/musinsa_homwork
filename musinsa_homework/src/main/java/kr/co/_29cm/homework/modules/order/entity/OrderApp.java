@@ -29,11 +29,11 @@ import lombok.NoArgsConstructor;
 * @fileName      : OrderApp.java
 * @author        : Gwang hyeok Go
 * @date          : 2023.06.09
-* @description   : ÁÖ¹® Entity
+* @description   : ì£¼ë¬¸ ì •ë³´ Entity
 * ===========================================================
 * DATE              AUTHOR             NOTE
 * -----------------------------------------------------------
-* 2023.06.09        ghgo       ÃÖÃÊ »ı¼º
+* 2023.06.09        ghgo     		ìµœì´ˆìƒì„±
  */
 @Entity
 @Table(name="order_app")
@@ -42,17 +42,17 @@ import lombok.NoArgsConstructor;
 public class OrderApp implements Persistable<String>{
 
 	@Id
-	@Comment("ÁÖ¹®¹øÈ£")
+	@Comment("ì£¼ë¬¸ë²ˆí˜¸")
 	@Column(length = 20)
 	private String orderNum;
 	
-	@Comment("ÀüÃ¼±İ¾×")
+	@Comment("ì´ê¸ˆì•¡")
 	private int totalAmount;
 	
-	@Comment("¹è¼Ûºñ")
+	@Comment("ë°°ì†¡ë¹„")
 	private int deliverAmount;
 	
-	@Comment("µî·ÏÀÏÀÚ")
+	@Comment("ë“±ë¡ì¼ì")
 	@CreatedDate
 	private LocalDateTime createDate;
 	

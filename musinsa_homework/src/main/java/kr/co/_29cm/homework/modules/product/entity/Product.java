@@ -10,7 +10,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Comment;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import kr.co._29cm.homework.modules.product.dto.ProductDTO;
@@ -23,11 +22,11 @@ import lombok.NoArgsConstructor;
 * @fileName      : Product.java
 * @author        : Gwang hyeok Go
 * @date          : 2023.06.07
-* @description   : »óÇ° ¿£Æ¼Æ¼
+* @description   : ìƒí’ˆ ì •ë³´ Entity
 * ===========================================================
 * DATE              AUTHOR             NOTE
 * -----------------------------------------------------------
-* 2023.06.07        ghgo       ÃÖÃÊ »ı¼º
+* 2023.06.07        ghgo       		ìµœì´ˆìƒì„±
  */
 @Entity
 @Table(name="product")
@@ -36,20 +35,20 @@ import lombok.NoArgsConstructor;
 public class Product{
 
 	@Id
-	@Comment("»óÇ°¹øÈ£")
+	@Comment("ìƒí’ˆë²ˆí˜¸")
 	private String productNum;
 	
-	@Comment("»óÇ°¸í")
+	@Comment("ìƒí’ˆëª…")
 	@Column(length = 200)
 	private String name;
 	
-	@Comment("»óÇ°°¡°İ")
+	@Comment("ìƒí’ˆê¸ˆì•¡")
 	private int price;
 	
-	@Comment("»óÇ°Àç°í·®")
+	@Comment("ì¬ê³ ")
 	private int cnt;
 	
-	@Comment("µî·ÏÀÏÀÚ")
+	@Comment("ë“±ë¡ì¼ì")
 	@CreatedDate
 	private LocalDateTime createDate;
 	
@@ -77,12 +76,12 @@ public class Product{
 		return cnt;
 	}
 	
-	/**Àç°í ¼ö·® °¨¼Ò*/
+	/**ìƒí’ˆ ì¬ê³  ë§ˆì´ë„ˆìŠ¤ ì²˜ë¦¬ ë©”ì†Œë“œ*/
 	public void minusProductCnt(int cnt) {
 		this.cnt -= cnt;
 	}
 	
-	/**Àç°í ¼ö·® Áõ°¡*/
+	/**ìƒí’ˆ ì¬ê³  í”ŒëŸ¬ìŠ¤ ì²˜ë¦¬ ë©”ì†Œë“œ*/
 	public void plusProductCnt(int cnt) {
 		this.cnt += cnt;
 	}

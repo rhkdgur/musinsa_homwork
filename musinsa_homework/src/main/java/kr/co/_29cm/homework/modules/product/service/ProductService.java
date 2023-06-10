@@ -25,11 +25,11 @@ import kr.co._29cm.homework.modules.product.repository.ProductRepository;
 * @fileName      : ProductService.java
 * @author        : Gwang hyeok Go
 * @date          : 2023.06.07
-* @description   : »óÇ° service
+* @description   : ìƒí’ˆ service
 * ===========================================================
 * DATE              AUTHOR             NOTE
 * -----------------------------------------------------------
-* 2023.06.07        ghgo       ÃÖÃÊ »ı¼º
+* 2023.06.07        ghgo       		ìµœì´ˆìƒì„±
  */
 @Service
 @Transactional(readOnly = true)
@@ -38,7 +38,7 @@ public class ProductService extends BaseService{
 	@Autowired
 	private ProductRepository productRepository;
 	
-	// °øÅë Äõ¸®
+	// ê³µí†µ ì¿¼ë¦¬ ë©”ì†Œë“œ
 	BooleanBuilder commonQuery(ProductDefaultDTO searchDTO) {
 		BooleanBuilder builder = new BooleanBuilder();
 		QProduct qProduct = QProduct.product;
@@ -51,7 +51,7 @@ public class ProductService extends BaseService{
 	}
 	
 	/**
-	 * »óÇ° ¸ñ·Ï Á¶È¸
+	 * ìƒí’ˆ ëª©ë¡ ì¡°íšŒ
 	 * @return
 	 * @throws Exception
 	 */
@@ -59,9 +59,11 @@ public class ProductService extends BaseService{
 		
 		QProduct qProduct = QProduct.product;
 		
+		//ìƒí’ˆ ê°œìˆ˜
 		Long cnt = jpaQuery.select(qProduct.count()).from(qProduct)
 				.where(commonQuery(searchDTO)).fetchFirst();
 		
+		//ìƒí’ˆ ëª©ë¡
 		List<Product> list = jpaQuery.selectFrom(qProduct)
 								.where(commonQuery(searchDTO))
 								.offset(searchDTO.getPageable().getOffset())
@@ -71,7 +73,7 @@ public class ProductService extends BaseService{
 	}
 	
 	/**
-	 * »óÇ° »ó¼¼ Á¶È¸
+	 * ìƒí’ˆ ìƒì„¸ ì¡°íšŒ
 	 * @param productDTO
 	 * @return
 	 * @throws Exception
@@ -82,7 +84,7 @@ public class ProductService extends BaseService{
 	}
 	
 	/**
-	 * »óÇ° Àç°í·® ¾÷µ¥ÀÌÆ®
+	 * ìƒí’ˆ ì¬ê³  ì—…ë°ì´íŠ¸
 	 * @param dto
 	 * @throws Exception
 	 */
@@ -92,13 +94,13 @@ public class ProductService extends BaseService{
 	}
 	
 	/**
-	 * »óÇ° Àç°í·® À¯È¿¼º Ã¼Å©
+	 * ìƒí’ˆ ì¬ê³ ëŸ‰ ìœ íš¨ì„± ì²´í¬
 	 * @param dto
 	 * @throws SoldOutException
 	 */
 	public void validateProductCntCheck(String productNum,int cnt) throws SoldOutException{
 		if(cnt < 0) {
-			throw new SoldOutException("SoldOutException ¹ß»ı. ÁÖ¹®¹øÈ£ "+productNum+"ÀÇ »óÇ°·®ÀÌ Àç°í·®º¸´Ù Å®´Ï´Ù.");
+			throw new SoldOutException("SoldOutException ë°œìƒ. ì£¼ë¬¸í•œ "+productNum+"ì€ ìƒí’ˆëŸ‰ì´ ì¬ê³ ëŸ‰ë³´ë‹¤ í½ë‹ˆë‹¤.");
 		}
 	}
 
