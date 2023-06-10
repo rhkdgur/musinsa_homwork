@@ -9,20 +9,20 @@ plugins {
 	id 'war'
 	id 'org.springframework.boot' version '2.7.5'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
-	//querydsl Ãß°¡
+	//querydsl ï¿½ß°ï¿½
     id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
 }
 
 group = 'kr.co._29cm'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+sourceCompatibility = '11'
 
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
 	all {
-		//logback°úÀÇ Ãæµ¹ ¹æÁö
+		//logbackï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ï¿½ï¿½
 		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
 	}
 }
@@ -38,7 +38,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security:2.6.7'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	
-	//querydsl Ãß°¡
+	//querydsl ï¿½ß°ï¿½
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
     implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
 	
@@ -55,7 +55,7 @@ tasks.named('test') {
 }
 
 
-//querydsl Ãß°¡ ½ÃÀÛ
+//querydsl ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½
 //def querydslDir = "src/main/generated/querydsl"
 def querydslDir = "$buildDir/generated/querydsl"
 
@@ -75,4 +75,4 @@ configurations {
    }
    querydsl.extendsFrom compileClasspath
 }
-//querydsl Ãß°¡ ³¡
+//querydsl ï¿½ß°ï¿½ ï¿½ï¿½
