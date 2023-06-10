@@ -3,7 +3,7 @@
 
 ### 프로젝트 환경
 > STS 툴 사용
-> Java , jdk 17, Gradle(gradle-7.6.1-bin)
+> Java , jdk 11, Gradle(gradle-7.6.1-bin)
 
 ### 실행 방법
 1. HomeworkApplication.class에서 java application 실행을 통한 콘솔 동작
@@ -34,38 +34,13 @@
 #### 프로젝트 구조
 
 > 패키지 구조
->> service, dto, entity,repository
-1. service : 실질적인 데이터가 처리되는 패키지
-2. dto : view 단에서 전달되는 Object 패키지
-3. entity : 데이터베이스 테이블과 매칭되는 Object 패키지
-4. repository : CRUD 정의하는 패키지
+* service : 실질적인 데이터가 처리
+* dto : view 단에서 전달되는 Object
+* entity : 데이터베이스 테이블과 매칭되는 Object
+* repository : CRUD 정의
 
-> 엔티티 구조
-1. Product : 상품 엔티티
-2. OrderApp : 주문자 엔티티
-3. OrderAppItem : 주문 상품 엔티티
-
-> DTO 구조
-1.ProductDTO ( 상품 정보) , ProductDefaultDTO(상품 검색 용)
-2.OrderAppDTO ( 주문자 정보) , OrderAppItemDTO(주문 상품 정보) , OrderAppDefaultDTO(주문 검색 용)
- 
-> Service 설명
-
-Product Service method
-+ selectProductList : 조건에 따른 상품 개수와 목록을 조회한다.
-+ selectProduct : 상품 상세 정보를 조회한다.
-+ updateProductCnt : 상품 재고량을 업데이트 한다.
-+ validateProductCntCheck : 재고량이 0개일 경우 SoldOutExcepion 을 발생시킵니다.
-
-Order Service method
-+ selectOrderAppList : 조건에 따른 주문자 개수와 목록을 조회한다.
-+ insertOrderApp : 주문 상품을 결제처리 한다.
-  - selectOrderNumMax : 신규 주문정보를 가져온다.
-  - selectProductNumListIn : 주문자가 선택한 상품의 정보를 새로 들고온다.
-    * 상품번호와 주문 상품번호를 비교하여 존재하는 상품인지 체크한다.
-    * 주문자가 가지고있는 상품번호를 토대로 주문상품의 구매수량과 재고수량을 비교한다.
-  - OrderAppItem에 해당 itemDTO 정보를 담아 OrderApp 연관관계 리스트에 담는다.
-  - Product.minusProductCnt : 구매수량을 재고량에서 마이너스 한다. 영속성 컨텍스트에 변경감지를 통해 update 처리 된다.
-  - PayAppDisplayUtil.productPayDisPlay : 결제 목록 출력
-  - entityManager.save : OrderApp 주문 정보 등록 처리
-    * OrderAppItem은 OrderApp 연관관계이다. 그래서 OrderApp의 ItemList(OrderAppItem)은 cascade = {CascadeType.PERSIST,CascadeType.MERGE}로 설정 되어있으므로 자동등록이 이루어진다.
+> 구현 방향
+* 단일 책임원칙을 준수하기 위해 모듈별 역할들을 package로 구분하였고 유지보수에 있어서 가독성에 어려움이 없도록하기 위한 방향으로 진행하였습니다.
+* 공통적으로 사용되는 코드는 통합package를 생성하여 관리 할 수 있도록 처리하였습니다.
+* DTO와 DefaultDTO를 구분지어 데이터 전송 객체(DTO) 와 데이터 검색(DefaultDTO) 객체로 구분 지어 사용하였습니다. 
+* Controller와 service를 구분지어 Controller에서 데이터의 유동성에 집중하였고, service는 실질적 데이터 처리를 하는 구간으로 정의하였습니다.
