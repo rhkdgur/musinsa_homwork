@@ -33,7 +33,7 @@
 
 #### 프로젝트 구조
 
-![프로젝트구조20230612](https://github.com/rhkdgur/musinsa_homwork/assets/67618667/5b168110-0b20-48e7-9f5b-41443769b19f)
+![프로젝트구조20230612](https://github.com/rhkdgur/musinsa_homwork/assets/67618667/354e41c7-f647-4180-b8b4-c5a874c95913)
 
 #### 패키지 구조
 
