@@ -45,6 +45,26 @@
 * entity : 데이터베이스 테이블과 매칭되는 Object
 * repository : 데이터베이스에 CRUD 커넥션 처리
 
+> 클래스
++ order
+  - OrderApp.class : 주문정보 entity, OrderAppItem.class : 주문상품정보 entity
+  - OrderAppDTO.class : 주문정보 DTO , OrderAppItemDTO.class : 주문상품정보 DTO , OrderAppDefaultDTO : 주문검색 DTO
+  - OrderAppService.class : 주문 service
+  - OrderAppRepostiroy.class : 주문 repostiroy, OrderAppItemRepository.class : 주문상품 repostiroy
++ product
+  - Product.class : 상품정보 entity
+  - ProductDTO.class : 상품 DTO, ProductDefaultDTO : 상품 검색 DTO
+  - ProductService.class : 상품 service
+  - ProductRepository.class : 상품 repository
++ common
+  - BaseVO.class : 검색 공통 VO
+  - BaseService.class : 공통 service
++ util
+  - PayAppDisplayUtil.class : 화면 출력 처리 util
++ exception
+  - NotExistProductException.class : 상품 미존재 예외처리
+  - SoldOutException.class : 재고 매진 예외처리
+
 > 구현 방향
 * 단일 책임원칙을 준수하기 위해 모듈별 역할들을 package로 구분하였고 유지보수에 있어서 가독성에 어려움이 없도록 하기 위한 방향으로 진행하였습니다.
 * 공통적으로 사용되는 코드는 통합 package를 생성하여 관리 할 수 있도록 처리하였습니다.
