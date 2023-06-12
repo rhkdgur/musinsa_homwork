@@ -35,7 +35,7 @@
 
 ### 패키지 구조
 
-![패키지구조](https://github.com/rhkdgur/musinsa_homwork/assets/67618667/3bf92c40-ec0c-484b-a677-9c0a35ee2930)
+![패키지구조20230612](https://github.com/rhkdgur/musinsa_homwork/assets/67618667/b202ce32-3b3a-425d-9875-551b913fa123)
 
 * service : 실질적인 데이터가 처리
 * dto : view 단에서 전달되는 Object
