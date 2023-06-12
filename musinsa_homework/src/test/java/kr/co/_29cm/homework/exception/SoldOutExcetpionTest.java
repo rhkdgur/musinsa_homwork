@@ -12,6 +12,18 @@ import org.springframework.test.context.junit4.SpringRunner;
 import kr.co._29cm.homework.modules.product.dto.ProductDTO;
 import kr.co._29cm.homework.modules.product.service.ProductService;
 
+/**
+ * 
+* @packageName   : kr.co._29cm.homework.exception
+* @fileName      : SoldOutExcetpionTest.java
+* @author        : Gwang hyeok Go
+* @date          : 2023.06.12
+* @description   : 예외처리 테스트
+* ===========================================================
+* DATE              AUTHOR             NOTE
+* -----------------------------------------------------------
+* 2023.06.12        ghgo       최초 생성
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Rollback(false)

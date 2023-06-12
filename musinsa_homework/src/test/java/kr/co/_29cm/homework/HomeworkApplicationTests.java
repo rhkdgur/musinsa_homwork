@@ -22,6 +22,18 @@ import kr.co._29cm.homework.modules.product.dto.ProductDefaultDTO;
 import kr.co._29cm.homework.modules.product.service.ProductService;
 import kr.co._29cm.homework.modules.util.PayAppDisplayUtil;
 
+/**
+ * 
+* @packageName   : kr.co._29cm.homework
+* @fileName      : HomeworkApplicationTests.java
+* @author        : Gwang hyeok Go
+* @date          : 2023.06.12
+* @description   : 프로세스 구동 TEST
+* ===========================================================
+* DATE              AUTHOR             NOTE
+* -----------------------------------------------------------
+* 2023.06.12        ghgo       최초 생성
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Rollback(false)
@@ -119,7 +131,7 @@ class HomeworkApplicationTests {
 				}
 			}
 		}catch (Exception e) {
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 		}finally {
 			try {
 				bf.close();
