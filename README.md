@@ -24,8 +24,8 @@
 7. 두번째 elseif 조건 : 상품번호가 비어있는 경우 break를 타고 초기화면 이동
 8. 세번째 else 조건 : 상품번호가 있고 수량을 선택하였을 경우 해당 상품들을 itemList에 담음 - 단) 입력 상품번호가 없을 경우 다시 처음부터 상품입력
 9. 6번에 이어서 상품구매가 완료되었을 경우 이동, orderService.insertOrderApp service 단으로 이동하여 데이터 처리
-10. orderService.insertOrderApp 에서 다시 한번 상품존재여부 체크(상품이 없을 경우 NotExistProductException 발생), 재고량 체크(재고가 없을 경우 SoldOutException 예외처리 발생)
-11. NotExistProductException 과 SoldOutException이 발생하지 않았다면 결제화면 출력 및 데이터베이스에 주문 정보 등록
+10. orderService.insertOrderApp 에서 다시 한번 상품존재여부 체크(상품이 없을 경우 NotExistException 발생), 재고량 체크(재고가 없을 경우 SoldOutException 예외처리 발생) ,중복상품 체크(중복상품을 선택하였을 경우 OverlapException 예외처리 발생)
+11. NotExistException,SoldOutException,OverlapException 이 발생하지 않았다면 결제화면 출력 및 데이터베이스에 주문 정보 등록
 12. 주문이 완료되고 나면 다시 break를 타고나와 1차 while 문에서 주문(o/order) 또는 종료(q/quit)를 선택
 13. q/quit를 선택하면 프로그램 종료
 
