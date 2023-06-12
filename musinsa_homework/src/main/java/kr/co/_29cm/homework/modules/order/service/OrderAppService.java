@@ -1,5 +1,6 @@
 package kr.co._29cm.homework.modules.order.service;
 
+import java.awt.event.ItemListener;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
@@ -15,7 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.querydsl.core.BooleanBuilder;
 
 import kr.co._29cm.homework.common.service.BaseService;
-import kr.co._29cm.homework.exception.NotExistProductException;
+import kr.co._29cm.homework.exception.NotExistException;
+import kr.co._29cm.homework.exception.OverlapException;
 import kr.co._29cm.homework.exception.SoldOutException;
 import kr.co._29cm.homework.modules.order.dto.OrderAppDTO;
 import kr.co._29cm.homework.modules.order.dto.OrderAppDefaultDTO;
@@ -101,7 +103,7 @@ public class OrderAppService extends BaseService{
 	 * @param dto
 	 * @throws Exception
 	 */
-	@Transactional(rollbackFor = {SoldOutException.class,NotExistProductException.class,Exception.class})
+	@Transactional(rollbackFor = {SoldOutException.class,NotExistException.class,OverlapException.class,Exception.class})
 	public void insertOrderApp(OrderAppDTO dto,List<String> productNumList) throws Exception {
 		if(lock.tryLock(10, TimeUnit.SECONDS)) {
 			
@@ -118,10 +120,16 @@ public class OrderAppService extends BaseService{
 				//주문 상품 정보에 대한 유효성 체크
 				for(OrderAppItemDTO itemDTO : dto.getItemList()) {
 					
-					//상품 존재 여부 체크
-					Product product = productList.stream().filter(x->x.getProductNum().equals(itemDTO.getProductNum())).findFirst().orElse(null);
-					if(product == null) {
-						throw new NotExistProductException("해당 상품은 존재하지 않는 상품입니다.");
+					
+					Product product = null;
+					//상품 유효성 체크
+					List<Product> list = productList.stream().filter(x->x.getProductNum().equals(itemDTO.getProductNum())).collect(Collectors.toList());
+					if(list.size() == 0) {
+						throw new NotExistException("해당 상품은 존재하지 않는 상품입니다.");
+					}else if(list.size() > 1) {
+						throw new OverlapException("해당 상품은 중복신청된 상품입니다.");
+					}else {
+						product = list.get(0);
 					}
 					
 					//상품 재고량 체크

@@ -12,11 +12,11 @@ package kr.co._29cm.homework.exception;
 * -----------------------------------------------------------
 * 2023.06.10        ghgo       최초 생성
  */
-public class NotExistProductException  extends Exception{
+public class NotExistException  extends Exception{
 
 	private static final long serialVersionUID = 1L;
 
-	public NotExistProductException(String message) {
+	public NotExistException(String message) {
 		super(message);
 	}
 	

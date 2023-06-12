@@ -44,7 +44,7 @@ public class PayAppDisplayUtil {
 		System.out.println("주문내역:");
 		System.out.println("-----------------------------------");
 		for(OrderAppItemDTO tmp : itemList) {
-			System.out.println(tmp.getName()+" - "+tmp.getCnt()+"��");
+			System.out.println(tmp.getName()+" - "+tmp.getCnt()+"개");
 			totalAmount += tmp.getAmount();
 		}			
 		System.out.println("-----------------------------------");

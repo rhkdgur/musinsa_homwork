@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -105,6 +106,15 @@ class HomeworkApplicationTests {
 							if(productDTO == null) {
 								System.out.println("입력하신 상품번호는 존재하지 않습니다.");
 								continue;
+							}
+							
+							//중복상품 체크
+							if(itemList.size() > 0) {
+								int len = itemList.stream().filter(x->x.getProductNum().equals(temp)).collect(Collectors.toList()).size();
+								if(len > 0) {
+									System.out.println("이미 구매상품으로 담긴 상품입니다.");
+									continue;
+								}
 							}
 							
 							//상품 수량 입력
