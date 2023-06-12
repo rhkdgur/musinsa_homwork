@@ -11,7 +11,7 @@
 ### 라이브러리
 > Spring jpa,
 > QueryDSL,
-> h2 database,
+> h2 database
 
 ### 메인 화면 프로세스
 
