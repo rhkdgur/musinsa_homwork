@@ -6,16 +6,14 @@
 > Java , jdk 11, Gradle(gradle-7.6.1-bin)
 
 ### 실행 방법
-1. HomeworkApplication.class에서 java application 실행을 통한 콘솔 동작
+* HomeworkApplication.class에서 java application 실행을 통한 콘솔 동작
 
-### 프로젝트 구현 방향
-
-#### 라이브러리
+### 라이브러리
 > Spring jpa,
 > QueryDSL,
 > h2 database,
 
-#### 메인 화면 프로세스
+### 메인 화면 프로세스
 
 1. BufferedReader를 이용하여 입력값을 받음
 2. 1차 while 반복문을 통해 주문(o/order) 또는 종료(q/quit)를 선택
@@ -31,11 +29,11 @@
 12. 주문이 완료되고 나면 다시 break를 타고나와 1차 while 문에서 주문(o/order) 또는 종료(q/quit)를 선택
 13. q/quit를 선택하면 프로그램 종료
 
-#### 프로젝트 구조
+### 프로젝트 구조
 
 ![프로젝트구조20230612](https://github.com/rhkdgur/musinsa_homwork/assets/67618667/cf367342-9ce3-4cb1-b6a3-f0f0d97051fe)
 
-#### 패키지 구조
+### 패키지 구조
 
 ![패키지구조](https://github.com/rhkdgur/musinsa_homwork/assets/67618667/3bf92c40-ec0c-484b-a677-9c0a35ee2930)
 
@@ -64,7 +62,7 @@
   - NotExistProductException.class : 상품 미존재 예외처리
   - SoldOutException.class : 재고 매진 예외처리
 
-### 구현 방향
+### 프로젝트 구현 방향
 * 단일 책임원칙을 준수하기 위해 모듈별 역할들을 package로 구분하였고 유지보수에 있어서 가독성에 어려움이 없도록 하기 위한 방향으로 진행하였습니다.
 * 공통적으로 사용되는 코드는 통합 package를 생성하여 관리 할 수 있도록 처리하였습니다.
 * Entity 데이터의 일관성,안정성을 주기위하여 DTO와 구분지어 데이터 처리하는 방식을 이용하였습니다.
