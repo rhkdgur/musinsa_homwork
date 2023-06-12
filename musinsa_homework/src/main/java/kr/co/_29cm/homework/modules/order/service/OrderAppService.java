@@ -120,16 +120,14 @@ public class OrderAppService extends BaseService{
 				//주문 상품 정보에 대한 유효성 체크
 				for(OrderAppItemDTO itemDTO : dto.getItemList()) {
 					
+					//상품 유효성 체크					
+					Product product = productList.stream().filter(x->x.getProductNum().equals(itemDTO.getProductNum())).findFirst().orElse(null);
+					List<String> list = productNumList.stream().filter(x->x.equals(itemDTO.getProductNum())).collect(Collectors.toList());
 					
-					Product product = null;
-					//상품 유효성 체크
-					List<Product> list = productList.stream().filter(x->x.getProductNum().equals(itemDTO.getProductNum())).collect(Collectors.toList());
-					if(list.size() == 0) {
-						throw new NotExistException("해당 상품은 존재하지 않는 상품입니다.");
+					if(product == null) {
+						throw new NotExistException("NotExistException 발생. 해당 '"+itemDTO.getProductNum()+"' 상품은 존재하지 않는 상품입니다.");
 					}else if(list.size() > 1) {
-						throw new OverlapException("해당 상품은 중복신청된 상품입니다.");
-					}else {
-						product = list.get(0);
+						throw new OverlapException("OverlapException 발생. 해당 '"+itemDTO.getProductNum()+"' 상품은 중복신청된 상품입니다.");
 					}
 					
 					//상품 재고량 체크
