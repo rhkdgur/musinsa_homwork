@@ -35,7 +35,7 @@
 
 ### 패키지 구조
 
-![패키지구조20230612](https://github.com/rhkdgur/musinsa_homwork/assets/67618667/c3245491-69c6-4aac-8614-d7c7f6a0a0d3)
+![패키지구조20230612](https://github.com/rhkdgur/musinsa_homwork/assets/67618667/3a049479-a550-48bd-8c37-38dbbd55a179)
 
 * service : 실질적인 데이터가 처리
 * dto : view 단에서 전달되는 Object
@@ -61,6 +61,8 @@
 + exception
   - NotExistProductException.class : 상품 미존재 예외처리
   - SoldOutException.class : 재고 매진 예외처리
+  - OverlapException.class : 중복 상품 예외처리
++ AppConfig : QueryDSL 등 application에 사용되는 라이브러리 bean 생성 config
 
 ### 프로젝트 구현 방향
 * 단일 책임원칙을 준수하기 위해 모듈별 역할들을 package로 구분하였고 유지보수에 있어서 가독성에 어려움이 없도록 하기 위한 방향으로 진행하였습니다.
