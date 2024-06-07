@@ -21,7 +21,7 @@ import kr.co._29cm.homework.modules.product.entity.Product;
 * -----------------------------------------------------------
 * 2023.06.07        ghgo       		최초생성
  */
-public interface ProductRepository extends JpaRepository<Product, String>{
+public interface ProductRepository extends JpaRepository<Product, String>,ProductCustomRepository{
 	
 	/**
 	 * 상품번호 별 조회
