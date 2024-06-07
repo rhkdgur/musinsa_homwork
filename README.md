@@ -73,4 +73,5 @@
 
 
 ### 무신사 프로젝트 결과
-[무신사 프로젝트 피드백..](https://github.com/rhkdgur/musinsa_homwork/wiki/%EB%AC%B4%EC%8B%A0%EC%82%AC-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B2%B0%EA%B3%BC-%ED%94%BC%EB%93%9C%EB%B0%B1%EC%97%90-%EB%8C%80%ED%95%9C-%EB%82%B4%EC%9A%A9)
+* [무신사 프로젝트 피드백..](https://github.com/rhkdgur/musinsa_homwork/wiki/%EB%AC%B4%EC%8B%A0%EC%82%AC-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B2%B0%EA%B3%BC-%ED%94%BC%EB%93%9C%EB%B0%B1%EC%97%90-%EB%8C%80%ED%95%9C-%EB%82%B4%EC%9A%A9)
+* 피드백 수용을 통한 리팩토링(예정)
