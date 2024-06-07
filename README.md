@@ -70,3 +70,7 @@
 * Entity 데이터의 일관성,안정성을 주기위하여 DTO와 구분지어 데이터 처리하는 방식을 이용하였습니다.
 * 단위 테스트를 통해 코드의 안정성 및 로직을 체크하여 프로세스에 이상이 없도록 작업을 진행하였습니다.
 * main(Controller)와 service를 구분지어 main(Controller)에서 데이터의 유동성에 집중하였고, service는 실질적 데이터 처리를 하는 구간으로 정의하였습니다.
+
+
+### 무신사 프로젝트 결과
+[무신사 프로젝트 피드백..](https://github.com/rhkdgur/musinsa_homwork/wiki/%EB%AC%B4%EC%8B%A0%EC%82%AC-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B2%B0%EA%B3%BC-%ED%94%BC%EB%93%9C%EB%B0%B1%EC%97%90-%EB%8C%80%ED%95%9C-%EB%82%B4%EC%9A%A9)
