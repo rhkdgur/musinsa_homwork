@@ -1,5 +1,6 @@
 package kr.co._29cm.homework.common.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,8 +19,8 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 * 2023.06.07        ghgo       		최초생성
  */
 @Component
-public class BaseService {
+@RequiredArgsConstructor
+public class BaseServiceImpl {
 	/**QueryDSL*/
-	@Autowired
-	protected JPAQueryFactory jpaQuery;
+	protected final JPAQueryFactory jpaQuery;
 }

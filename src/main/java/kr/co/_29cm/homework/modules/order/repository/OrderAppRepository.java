@@ -21,7 +21,7 @@ import kr.co._29cm.homework.modules.order.entity.OrderApp;
 * -----------------------------------------------------------
 * 2023.06.07        ghgo       		최초생성
  */
-public interface OrderAppRepository extends JpaRepository<OrderApp, String>{
+public interface OrderAppRepository extends JpaRepository<OrderApp, String>, OrderAppCustomRepository{
 	
 	/***
 	 * �ֹ���ȣ ����

@@ -27,6 +27,13 @@ configurations {
 	}
 }
 
+//콘솔 어플리케이션 실행
+bootRun {
+	if (project.hasProperty('args')) {
+		args project.args.split(',')
+	}
+}
+
 repositories {
 	mavenCentral()
 }
@@ -41,7 +48,9 @@ dependencies {
 	//querydsl �߰�
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
     implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
-	
+	testImplementation 'junit:junit:4.13.1'
+	testImplementation 'junit:junit:4.13.1'
+
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -53,7 +62,6 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
-
 
 //querydsl
 //def querydslDir = "src/main/generated/querydsl"

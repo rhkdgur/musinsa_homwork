@@ -1,21 +1,5 @@
 package kr.co._29cm.homework.modules.order.service;
 
-import java.awt.event.ItemListener;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.querydsl.core.BooleanBuilder;
-
-import kr.co._29cm.homework.common.service.BaseService;
 import kr.co._29cm.homework.exception.NotExistException;
 import kr.co._29cm.homework.exception.OverlapException;
 import kr.co._29cm.homework.exception.SoldOutException;
@@ -24,13 +8,21 @@ import kr.co._29cm.homework.modules.order.dto.OrderAppDefaultDTO;
 import kr.co._29cm.homework.modules.order.dto.OrderAppItemDTO;
 import kr.co._29cm.homework.modules.order.entity.OrderApp;
 import kr.co._29cm.homework.modules.order.entity.OrderAppItem;
-import kr.co._29cm.homework.modules.order.entity.QOrderApp;
-import kr.co._29cm.homework.modules.order.repository.OrderAppItemRepository;
 import kr.co._29cm.homework.modules.order.repository.OrderAppRepository;
 import kr.co._29cm.homework.modules.product.entity.Product;
 import kr.co._29cm.homework.modules.product.repository.ProductRepository;
 import kr.co._29cm.homework.modules.product.service.ProductService;
 import kr.co._29cm.homework.modules.util.PayAppDisplayUtil;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.stream.Collectors;
 
 /**
  * 
@@ -45,57 +37,29 @@ import kr.co._29cm.homework.modules.util.PayAppDisplayUtil;
 * 2023.06.07        ghgo       		 최초생성
  */
 @Service
+@RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class OrderAppService extends BaseService{
+public class OrderAppService{
 
-	@Autowired
-	private OrderAppRepository orderAppRepository;
-	
-	@Autowired
-	private ProductService productService;
-	
-	@Autowired
-	private ProductRepository productRepository;
+	private final OrderAppRepository orderAppRepository;
+
+	private final ProductService productService;
+
+	private final ProductRepository productRepository;
 	
 	private static final Lock lock = new ReentrantLock();
 	
-	/**
-	 * 검색 공통 쿼리
-	 * @param searchDTO
-	 * @return
-	 */
-	BooleanBuilder commonQuery(OrderAppDefaultDTO searchDTO) {
-		BooleanBuilder builder = new BooleanBuilder();
-		QOrderApp qOrderApp = QOrderApp.orderApp;
-		
-		//주문번호
-		if(searchDTO.getOrderNum() != null && !searchDTO.getOrderNum().isEmpty()) {
-			builder.and(qOrderApp.orderNum.eq(searchDTO.getOrderNum()));
-		}
-		
-		return builder;
-	}
+
 	
 	
 	/**
 	 * 주문 정보 조회
-	 * @param dto
+	 * @param searchDTO
 	 * @return
 	 * @throws Exception
 	 */
 	public Page<OrderAppDTO> selectOrderAppList(OrderAppDefaultDTO searchDTO) throws Exception {
-		
-		QOrderApp qOrderApp = QOrderApp.orderApp;
-		Long cnt = jpaQuery.select(qOrderApp.count())
-						.from(qOrderApp).where(commonQuery(searchDTO)).fetchFirst();
-		
-		List<OrderApp> list  = jpaQuery.selectFrom(qOrderApp)
-											.where(commonQuery(searchDTO))
-											.offset(searchDTO.getPageable().getOffset())
-											.limit(searchDTO.getPageable().getPageSize())
-											.fetch();
-		
-		return new PageImpl<>(list.stream().map(x-> new OrderAppDTO(x)).collect(Collectors.toList()),searchDTO.getPageable(),cnt);
+		return orderAppRepository.selectOrderAppPageList(searchDTO);
 	}
 	
 	/**
